@@ -48,14 +48,14 @@
           <div class="row">
             <div class="col-md-6">
               <label for="name">이름</label>
-              <input type="name" class="form-control" id="name" placeholder="" value="" required>
+              <input type="name" class="form-control" id="name-input" placeholder="" value="" required>
               <div class="invalid-feedback">
                 이름을 입력해주세요.
               </div>
             </div>
             <div class="col-md-6 mb-3">
               <label for="student_id">학번</label>
-              <input type="student_id" class="form-control" id="nickname" placeholder="" value="" required>
+              <input type="student_id" class="form-control" id="student_id-input" placeholder="" value="" required>
               <div class="invalid-feedback">
                 학번을 입력해주세요.
               </div>
@@ -63,15 +63,15 @@
           </div>
           <div class="row">
             <div class="col-md-6">
-              <label for="name">이메일</label>
-              <input type="name" class="form-control" id="email" placeholder="" value="" required>
+              <label for="email">이메일</label>
+              <input type="email" class="form-control" id="email-input" placeholder="" value="" required>
               <div class="invalid-feedback">
-                이메일을 입력해주세요.
+                이메일을 입력해주세요. 차후 로그인 시 사용됩니다.
               </div>
             </div>
             <div class="col-md-6 mb-3">
-              <label for="student_id">전화번호</label>
-              <input type="student_id" class="form-control" id="phonenumbeer" placeholder="" value="" required>
+              <label for="phonenumber">전화번호</label>
+              <input type="phonenumber" class="form-control" id="phonenumber-input" placeholder="" value="" required>
               <div class="invalid-feedback">
                 전화번호를 입력해주세요.
               </div>
@@ -80,7 +80,7 @@
 
           <div class="mb-3">
             <label for="skku_account">성균관대학교 계정</label>
-            <input type="skku_account" class="form-control" id="email" placeholder="" required>
+            <input type="skku_account" class="form-control" id="skkuemail-input" placeholder="" required>
             <div class="invalid-feedback">
               성균관대학교 계정을 입력해주세요.
             </div>
@@ -88,15 +88,15 @@
 
           <div class="mb-3">
             <label for="skku_password">비밀번호</label>
-            <input type="password" class="form-control" id="address" placeholder="" required>
+            <input type="skku-password" class="form-control" id="password-input" placeholder="" required>
             <div class="invalid-feedback">
-              성균관대학교 계정 비밀번호를 입력해주세요.
+              성균관대학교 계정 비밀번호를 입력해주세요. 차후 로그인 시 사용됩니다.
             </div>
           </div>
 
           <div class="mb-3">
             <label for="g_account">구글 계정</label>
-            <input type="g_account" class="form-control" id="address2" placeholder="" required>
+            <input type="g_account" class="form-control" id="g_account-input" placeholder="" required>
             <div class="invalid-feedback">
               구글 계정을 입력해주세요.
             </div>
@@ -104,7 +104,7 @@
 
           <div class="mb-3">
             <label for="g_password">구글 비밀번호</label>
-            <input type="password" class="form-control" id="address2" placeholder="" required>
+            <input type="password" class="form-control" id="g_password-input" placeholder="" required>
             <div class="invalid-feedback">
               구글 비밀번호를 입력해주세요.
             </div>
@@ -117,7 +117,7 @@
             <label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
           </div>
           <div class="mb-4"></div>
-          <button class="btn btn-primary btn-lg btn-block" type="submit">가입 완료</button>
+          <button class="btn btn-primary btn-lg btn-block" type="submit" id="submit">가입 완료</button>
         </form>
       </div>
     </div>
@@ -138,6 +138,26 @@
         }, false);
       });
     }, false);
+
+    document.getElementById("submit").addEventListener('click', () => {
+        let name = document.getElementById("name-input").value;
+        let studentID = document.getElementById("student_id-input").value;
+        let email = document.getElementById("email-input").value;
+        let phoneNumber = document.getElementById("phonenumber-input").value;
+        let schoolEmail = document.getElementById("skkuemail-input").value;
+        let password = document.getElementById("password-input").value;
+        let googleID = document.getElementById("g_account-input").value;
+        let googlePW = document.getElementById("g_password-input").value;
+        
+        fetch("/userList", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name, studentID, email, phoneNumber, schoolEmail, password, googleID, googlePW })
+        })
+        // https://velog.io/@ctp102/SptringBoot-fetch-post-gson으로-서버에-데이터-전송-후-활용하기
+    });
   </script>
 </body>
 

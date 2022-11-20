@@ -89,15 +89,48 @@
             <div class="checkbox mb-3">
                 <label>
                     <input type="checkbox" value="remember-me"> Remember me
-                </label>
+                </label> 
             </div>
-            <button class="w-100 btn btn-lg btn-primary" onclick="location.href='calendar.html'">Sign in</button>
-
 
         </form>
+        <!--
+        <button id="signinButton" class="w-100 btn btn-lg btn-primary" onclick="location.href='calendar.html'">Sign in</button>
+        --->
+        <button id="loginButton" class="w-100 btn btn-lg btn-primary" onclick="Login()">Sign in</button>
         <button class="w-100 btn btn-lg btn-secondary" onclick="location.href='Register.html'">Register</button>
     </main>
 
+    <script>
+        function Login(){
+            const config = {
+                method: "get"
+            };
+
+            fetch("/userList", { method: "GET" })
+                .then((res) => res.json())
+                .then((userList) => {
+                    let email_input = document.getElementById("floatingInput").value;
+                    let password_input = document.getElementById("floatingPassword").value;
+                    let isUser = false;
+                    
+                    for (idx in userList){
+                        if (email_input === userList[idx].email && password_input === userList[idx].password){
+                            isUser = true;
+                            break;
+                        }
+                    }
+
+                    if (isUser){
+                        let link = 'calendar.html';
+                        location.href = link;
+                    }
+
+                    else {
+                        // 에러창 생성?
+                    }
+                })
+        }
+    </script>
 
 
 </body>

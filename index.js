@@ -4,6 +4,26 @@ const weather = require('weather-js');
 const app = express();
 const port = 3000;
 
+app.use(express.json())
+
+let userList = [];
+
+const uObject = {
+    name:         "John",  // 사용자 실명
+    studentID:    "2020202020",   // 학번
+    email:        "example@example.com",  // 이메일
+    phoneNumber:  "0123456789",   // 핸드폰 번호
+    schoolEmail:  "School@example.com",   // 학교 이메일
+    password:     "password", // 이 사이트에서 사용할 비밀번호
+    googleID:     "googleID", // 구글 연동을 위한 아이디
+    googlePW:     "googlePW", // 구글 연동을 위한 비밀번호
+}
+
+userList.push(uObject);
+
+console.log(userList[0].name);
+console.log(userList.length);
+
 function getWeather(weather) {
     const weatherObject = {
         "location": "",
@@ -61,6 +81,18 @@ app.post('/weather', (req, res) => {
 
     //res.send();
 
+});
+
+app.get('/userList', (req, res) => {
+    res.send(userList);
+});
+
+app.post('/userList', (req, res) => {
+    console.log("Hello");
+    console.log(req.body);
+    userList.push(req.body);
+    console.log(userList.length);
+    res.send(200);
 });
 
 app.listen(port, () => {
