@@ -163,15 +163,16 @@
 
     <script>
         window.addEventListener("load", () => {
-            let where = "Busan, South Korea"
 
+
+            let where = { where: "Suwon, South Korea" }
 
             fetch("/weather", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ where }),
+                body: JSON.stringify(where)
             }).then(res => res.json())
                 .then(weatherObject => {
 
