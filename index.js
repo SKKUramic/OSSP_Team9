@@ -9,14 +9,14 @@ app.use(express.json())
 let userList = [];
 
 const uObject = {
-    name:         "John",  // 사용자 실명
-    studentID:    "2020202020",   // 학번
-    email:        "example@example.com",  // 이메일
-    phoneNumber:  "0123456789",   // 핸드폰 번호
-    schoolEmail:  "School@example.com",   // 학교 이메일
-    password:     "password", // 이 사이트에서 사용할 비밀번호
-    googleID:     "googleID", // 구글 연동을 위한 아이디
-    googlePW:     "googlePW", // 구글 연동을 위한 비밀번호
+    name: "John",  // 사용자 실명
+    studentID: "2020202020",   // 학번
+    email: "example@example.com",  // 이메일
+    phoneNumber: "0123456789",   // 핸드폰 번호
+    schoolEmail: "School@example.com",   // 학교 이메일
+    password: "password", // 이 사이트에서 사용할 비밀번호
+    googleID: "googleID", // 구글 연동을 위한 아이디
+    googlePW: "googlePW", // 구글 연동을 위한 비밀번호
 }
 
 userList.push(uObject);
@@ -57,11 +57,11 @@ app.use(express.static('public'));
 
 app.post('/weather', (req, res) => {
 
-    console.log(req.body);
+    //console.log(req.body);
 
-    //let where = req.body.where;
+    let where = req.body.where;
 
-    weather.find({ search: "Busan, South Korea", degreeType: 'C' }, function (err, result) {
+    weather.find({ search: where, degreeType: 'C' }, function (err, result) {
         if (err) console.log(err);
 
         //console.log(JSON.stringify(result, null, 2));
