@@ -81,6 +81,14 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="location">거주 지역</label>
+                        <input type="location" class="form-control" id="location-input" placeholder="" required>
+                        <div class="invalid-feedback">
+                            사는 곳을 입력해주세요. 해당지역 오늘의 날씨를 보여드립니다.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
                         <label for="skku_account">성균관대학교 계정</label>
                         <input type="skku_account" class="form-control" id="skkuemail-input" placeholder="" required>
                         <div class="invalid-feedback">
@@ -119,7 +127,8 @@
                         <label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
                     </div>
                     <div class="mb-4"></div>
-                    <button class="btn btn-primary btn-lg btn-block" type="submit" id="submit">가입 완료</button>
+                    <button class="btn btn-primary btn-lg btn-block" type="submit" id="submit">가입
+                        완료</button>
                 </form>
             </div>
         </div>
@@ -150,15 +159,22 @@
             let password = document.getElementById("password-input").value;
             let googleID = document.getElementById("g_account-input").value;
             let googlePW = document.getElementById("g_password-input").value;
+            let location = document.getElementById("location-input").value;
 
             fetch("/userList", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ name, studentID, email, phoneNumber, schoolEmail, password, googleID, googlePW })
-            })
+                body: JSON.stringify({ name, studentID, email, phoneNumber, schoolEmail, password, googleID, googlePW, location })
+            }).then(res => res.text())
+                .then(text => {
+                    console.log(text);
+                })
             // https://velog.io/@ctp102/SptringBoot-fetch-post-gson으로-서버에-데이터-전송-후-활용하기
+
+
+
         });
     </script>
 </body>
