@@ -17,6 +17,7 @@ const uObject = {
     password: "password", // 이 사이트에서 사용할 비밀번호
     googleID: "googleID", // 구글 연동을 위한 아이디
     googlePW: "googlePW", // 구글 연동을 위한 비밀번호
+    location: "suwon, South Korea",
 }
 
 userList.push(uObject);
