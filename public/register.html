@@ -48,15 +48,15 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label for="name">이름</label>
-                            <input type="name" class="form-control" id="name-input" placeholder="" value="" required>
+                            <input type="name" class="form-control" id="name-input" placeholder="김철수" value="" required>
                             <div class="invalid-feedback">
                                 이름을 입력해주세요.
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="student_id">학번</label>
-                            <input type="student_id" class="form-control" id="student_id-input" placeholder="" value=""
-                                required>
+                            <input type="student_id" class="form-control" id="student_id-input" placeholder="2000123456" value=""
+                                required pattern="\d{10}">
                             <div class="invalid-feedback">
                                 학번을 입력해주세요.
                             </div>
@@ -65,15 +65,16 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label for="email">이메일</label>
-                            <input type="email" class="form-control" id="email-input" placeholder="" value="" required>
+                            <input type="email" class="form-control" id="email-input" 
+                            placeholder="example@example.com" value="" required pattern="\w+@\w+\.\w+">
                             <div class="invalid-feedback">
                                 이메일을 입력해주세요. 차후 로그인 시 사용됩니다.
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="phonenumber">전화번호</label>
-                            <input type="phonenumber" class="form-control" id="phonenumber-input" placeholder=""
-                                value="" required>
+                            <input type="phonenumber" class="form-control" id="phonenumber-input" placeholder="010-XXXX-XXXX"
+                                value="" required pattern="(010)-\d{3,4}-\d{4}">
                             <div class="invalid-feedback">
                                 전화번호를 입력해주세요.
                             </div>
@@ -82,9 +83,10 @@
 
                     <div class="mb-3">
                         <label for="location">거주 지역</label>
-                        <input type="location" class="form-control" id="location-input" placeholder="" required>
+                        <input type="location" class="form-control" id="location-input"
+                        placeholder="Suwon" required>
                         <div class="invalid-feedback">
-                            사는 곳을 입력해주세요. 해당지역 오늘의 날씨를 보여드립니다.
+                            사는 곳을 입력해주세요.
                         </div>
                     </div>
 
@@ -100,13 +102,13 @@
                         <label for="skku_password">비밀번호</label>
                         <input type="skku-password" class="form-control" id="password-input" placeholder="" required>
                         <div class="invalid-feedback">
-                            성균관대학교 계정 비밀번호를 입력해주세요. 차후 로그인 시 사용됩니다.
+                            성균관대학교 계정 비밀번호를 입력해주세요.
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label for="g_account">구글 계정</label>
-                        <input type="g_account" class="form-control" id="g_account-input" placeholder="" required>
+                        <input type="g_account" class="form-control" id="g_account-input" placeholder="해당 계정이 로그인 시 사용됩니다." required>
                         <div class="invalid-feedback">
                             구글 계정을 입력해주세요.
                         </div>
@@ -161,20 +163,49 @@
             let googlePW = document.getElementById("g_password-input").value;
             let location = document.getElementById("location-input").value;
 
-            fetch("/userList", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ name, studentID, email, phoneNumber, schoolEmail, password, googleID, googlePW, location })
-            }).then(res => res.text())
-                .then(text => {
-                    console.log(text);
+            let email_regax = /\w+@\w+\.\w+/;
+            let ID_regax = /\w+/;
+
+            fetch("/userList", { method: "GET" })
+                .then((res) => res.json())
+                .then((userList) => {
+                    let boolValue = "NaN";
+
+                    if (email_regax.test(email) == false){boolValue = "False";}
+                    if (ID_regax.test(googleID) == false){boolValue = "False";}
+                    for (idx in userList){
+                        if (email === userList[idx].email || googleID === userList[idx].googleID){
+                            boolValue = "False";
+                        }
+                    }
+                    if (boolValue === "NaN"){boolValue = "True";}
+
+                    if (boolValue === "True"){
+                        /*
+                        fetch("/Test", {
+                            method: "POST",
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ boolValue })
+                        })
+                        */
+                        
+                        fetch("/userList", {
+                            method: "POST",
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ name, studentID, email, phoneNumber, schoolEmail, password, googleID, googlePW, location })
+                        })
+                            .then(res => res.text())
+                            .then(text => {
+                                console.log(text);
+                            })
+                        
+                    }
                 })
-            // https://velog.io/@ctp102/SptringBoot-fetch-post-gson으로-서버에-데이터-전송-후-활용하기
-
-
-
+            
         });
     </script>
 </body>

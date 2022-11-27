@@ -7,12 +7,13 @@ const port = 3000;
 app.use(express.json())
 
 let userList = [];
+let Test = "";
 
 const uObject = {
     name: "John",  // 사용자 실명
     studentID: "2020202020",   // 학번
     email: "example@example.com",  // 이메일
-    phoneNumber: "0123456789",   // 핸드폰 번호
+    phoneNumber: "012-3456-7890",   // 핸드폰 번호
     schoolEmail: "School@example.com",   // 학교 이메일
     password: "password", // 이 사이트에서 사용할 비밀번호
     googleID: "googleID", // 구글 연동을 위한 아이디
@@ -85,14 +86,20 @@ app.post('/weather', (req, res) => {
 });
 
 app.get('/userList', (req, res) => {
+    console.log("Getfunction starts.")
     res.send(userList);
 });
 
 app.post('/userList', (req, res) => {
-    console.log("Hello");
-    console.log(req.body);
+    // console.log("Hello");
+    // console.log(req.body);
     userList.push(req.body);
     console.log(userList.length);
+    res.send(200);
+});
+
+app.post('/Test', (req, res) => {
+    console.log(req.body);
     res.send(200);
 });
 
