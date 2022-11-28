@@ -18,6 +18,7 @@
   "homepage": "https://github.com/SKKUramic/OSSP_Team9#readme",
   "dependencies": {
     "express": "^4.18.2",
+    "puppeteer": "^19.3.0",
     "weather-js": "^2.0.0"
   }
 }

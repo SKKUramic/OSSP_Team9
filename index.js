@@ -64,6 +64,8 @@ app.post('/weather', (req, res) => {
 
     let where = req.body.where;
 
+    //console.log("위치 : ", where);
+
     weather.find({ search: where, degreeType: 'C' }, function (err, result) {
         if (err) console.log(err);
 
