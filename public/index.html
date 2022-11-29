@@ -101,6 +101,7 @@
     </main>
 
     <script>
+
         function Login(){
             const config = {
                 method: "get"
@@ -109,27 +110,54 @@
             fetch("/userList", { method: "GET" })
                 .then((res) => res.json())
                 .then((userList) => {
+                    let name = ""
+                    let studentID = ""
+                    let phoneNumber = ""
+                    let schoolEmail = ""
+                    let googleID = ""
+                    let googlePW = ""
+                    let location = ""
+
                     let email_input = document.getElementById("floatingInput").value;
                     let password_input = document.getElementById("floatingPassword").value;
                     let isUser = false;
-                    
+
                     for (idx in userList){
                         if (email_input === userList[idx].email && password_input === userList[idx].password){
                             isUser = true;
+                            name = userList[idx].name
+                            studentID = userList[idx].studentID;
+                            phoneNumber = userList[idx].phoneNumber;
+                            schoolEmail = userList[idx].schoolEmail;
+                            googleID = userList[idx].googleID;
+                            googlePW = userList[idx].googlePW;
+                            location = userList[idx].location;
                             break;
                         }
                     }
-
+                    
                     if (isUser){
                         let link = 'calendar.html';
                         location.href = link;
-                    }
-
-                    else {
-                        // 에러창 생성?
+                        fetch("/loginUser", {
+                            method: "POST",
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            redirect: 'follow',
+                            body: JSON.stringify({ name, studentID, email_input, phoneNumber, schoolEmail, password_input, googleID, googlePW, location })
+                        })
+                        window.open("calendar.html", "_self");
                     }
                 })
+
+                
+                
         }
+
+        document.getElementById("submit").addEventListener('click', () => {
+            
+        });
     </script>
 
 
