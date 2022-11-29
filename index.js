@@ -22,6 +22,18 @@ const uObject = {
     location: "suwon, South Korea",
 }
 
+const loginUser = {  // 로그인한 유저의 정보를 저장함
+    Username: "",
+    UserSchoolID: "",
+    UserEmail: "",
+    UserphoneNumber: "",
+    UserSchoolEmail: "",
+    UserPassword: "",
+    UserGID: "",
+    UserGPW: "",
+    Userlocation: "",
+}
+
 userList.push(uObject);
 
 console.log(userList[0].name);
@@ -98,7 +110,24 @@ app.post('/userList', (req, res) => {
     // console.log(req.body);
     userList.push(req.body);
     console.log(userList.length);
-    res.send(200);
+    res.send(301);
+});
+
+app.post('/loginUser', (req, res) => {
+    
+    loginUser.Username = req.body.name
+    loginUser.UserSchoolID = req.body.studentID
+    loginUser.UserEmail = req.body.email_input
+    loginUser.UserphoneNumber = req.body.phoneNumber
+    loginUser.UserSchoolEmail = req.body.schoolEmail
+    loginUser.UserPassword = req.body.password_input
+    loginUser.UserGID = req.body.googleID
+    loginUser.UserGPW = req.body.googlePW
+    loginUser.Userlocation = req.body.location
+    
+    console.log(req.body)
+    console.log(loginUser)
+    res.send(301);
 });
 
 app.post('/Test', (req, res) => {
