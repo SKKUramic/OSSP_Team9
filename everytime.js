@@ -2,12 +2,9 @@ const puppeteer = require("puppeteer");
 
 async function crawl() {
   // 가상 브라우져를 실행, headless: false를 주면 벌어지는 일을 새로운 창을 열어 보여준다(default: true)
-  const browser = await puppeteer.launch({headless: false, args:["--window-size=1920,1080"]});
+  const browser = await puppeteer.launch({headless: false});
   const page = await browser.newPage();
-  page.setViewport({
-    width:1920,
-    height: 1080,
-  })
+  page.setViewport({width:2500,height: 800,})
 
   //회원가입할때 에타 아이디 비밀번호도 입력받거나.. 에타 로그인창을 따로 만들어야...
 
@@ -32,7 +29,6 @@ async function crawl() {
   if(page.url() === "https://everytime.kr/"){
     
     await page.goto('https://everytime.kr/timetable');
-    console.log('wtf');
     
     await page.waitForSelector('#container > div');
     await page.$eval('#container > ul[class="floating"]', el => el.remove());
