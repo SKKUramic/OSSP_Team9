@@ -105,14 +105,13 @@
                 </div>
             </nav>
 
-            <main class="col-md-6 ms-sm-auto col-lg-auto px-md-4">
+            <main class="col-md-6 ms-sm-auto col-lg-8 px-md-4">
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">Dashboard</h1>
 
                 </div>
-                <iframe src="https://calendar.google.com/calendar/embed?src=drw005526%40gmail.com&ctz=Asia%2FSeoul"
-                    style="border: 0" width=100% height=100% frameborder="0" scrolling="no"></iframe>
+                <img src="/image/timetable.png" alt="" style="border: 0" width=100% height=100%>
 
                 <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
 
@@ -124,7 +123,7 @@
 
                     <h6
                         class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
-                        <span>Everytime</span>
+                        <span>schedule</span>
                         <a class="link-secondary" href="#" aria-label="Add a new report">
                             <span data-feather="plus-circle" class="align-text-bottom"></span>
                         </a>
@@ -133,7 +132,14 @@
 
 
                     </div>
-                    <img src="/image/timetable.png" alt="">
+                    <label class="list-group-item d-flex gap-3 bg-light">
+                        <span class="pt-1 form-checked-content">
+                            <span contenteditable="true" class="w-100">Add new schedule</span>
+                            <input id="s_title" type="text" name="" value="" class="w-100" placeholder="Title">
+                            <input id="s_dead" type="text" name="" value="" class="w-100" placeholder="Deadline">
+                            <input type="button" name="" value="append" class="w-100" onclick="addschedule()">
+                        </span>
+                    </label>
                 </div>
             </nav>
         </div>
