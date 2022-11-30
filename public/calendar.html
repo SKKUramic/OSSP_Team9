@@ -111,10 +111,11 @@
                     <h1 class="h2">Dashboard</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group me-2">
-                          <button type="button" class="btn btn-sm btn-outline-secondary" onclick="history.back()" >Log Out</button>
+                            <button type="button" id="logout" class="btn btn-sm btn-outline-secondary" onclick="">Log
+                                Out</button>
                         </div>
-                        
-                      </div>
+
+                    </div>
                 </div>
                 <img src="/image/timetable.png" alt="" style="border: 0" width=100% height=100%>
 
@@ -133,7 +134,7 @@
 
                     <h6
                         class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
-                        <span>schedule</span>
+                        <span class="fs-4 fw-bold">schedule</span>
                         <a class="link-secondary" href="#" aria-label="Add a new report">
                             <span data-feather="plus-circle" class="align-text-bottom"></span>
                         </a>
@@ -160,7 +161,7 @@
                     <p class="mb-2">할 일</p>
                     <input type="text" class="form-control mb-2" id="s_title" placeholder="Enter a task here">
                     <p class="mb-2">기한</p>
-                    <input type="text" class="form-control" id="s_dead" placeholder="Due Date">
+                    <input type="text" class="form-control" id="s_dead" placeholder="Due Date (ex. 2022-01-01)">
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="addButton" class="btn btn-primary" data-bs-dismiss="modal">추가하기</button>
@@ -193,6 +194,8 @@
                 .then(text => {
                     let where = { where: text };
 
+                    //console.log(where);
+
                     fetch("/weather", {
                         method: "POST",
                         headers: {
@@ -216,7 +219,24 @@
                         })
                 })
 
+            fetch('/loadSchdules', {
+                method: "GET",
+            }).then(res => res.json())
+                .then(todos => {
+                    console.log(todos);
+                    console.log(todos.length);
+                    //console.log(schedules);
+                    //console.log(schedulelen);
 
+
+                    if (!(todos.length)) return;
+
+                    schedulelen = todos.length;
+                    schedules = todos;
+
+                    displayschedule();
+
+                })
         })
 
         let myModalEl = document.getElementById('taskModal');
@@ -228,6 +248,24 @@
         addButton.addEventListener("click", () => {
             console.log("추가");
             addschedule();
+        })
+
+        let logOut = document.getElementById('logout')
+
+        logOut.addEventListener("click", () => {
+            console.log(schedules);
+            fetch("/saveSchedules", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(schedules)
+            }).then(res => res.text())
+                .then(text => {
+                    console.log(text);
+                })
+
+            location.href = "index.html";
         })
 
 
