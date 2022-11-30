@@ -1,6 +1,7 @@
 const express = require('express');
 const weather = require('weather-js');
 const puppeteer = require("puppeteer");
+var exports = module.exports = {};
 
 const app = express();
 const port = 3000;
@@ -30,8 +31,8 @@ const loginUser = {  // 로그인한 유저의 정보를 저장함
     UserphoneNumber: "",
     UserSchoolEmail: "",
     UserPassword: "",
-    UserGID: "",
-    UserGPW: "",
+    UserEID: "",
+    UserEPW: "",
     Userlocation: "",
     UserSchedules: [],
 }
@@ -40,6 +41,16 @@ userList.push(uObject);
 
 console.log(userList[0].name);
 console.log(userList.length);
+
+exports.getID = function () {
+    return loginUser.UserEID;
+};
+
+exports.getPW = function () {
+    return loginUser.UserEPW;
+};
+
+// export { getID, getPW }
 
 function getWeather(weather) {
     const weatherObject = {
