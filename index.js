@@ -70,11 +70,16 @@ function getWeather(weather) {
 
 app.use(express.static('public'));
 
+app.get('/loginUserLocation', (req, res) => {
+    //console.log("loginUser 위치 : ", loginUser.Userlocation)
+    res.send(loginUser.Userlocation);
+})
+
 app.post('/weather', (req, res) => {
 
-    //console.log(req.body);
-
     let where = req.body.where;
+
+    //console.log("위치 : ", where);
 
     weather.find({ search: where, degreeType: 'C' }, function (err, result) {
         if (err) console.log(err);
@@ -112,7 +117,7 @@ app.post('/userList', (req, res) => {
 });
 
 app.post('/loginUser', (req, res) => {
-    
+
     loginUser.Username = req.body.name
     loginUser.UserSchoolID = req.body.studentID
     loginUser.UserEmail = req.body.email_input
@@ -122,7 +127,7 @@ app.post('/loginUser', (req, res) => {
     loginUser.UserGID = req.body.googleID
     loginUser.UserGPW = req.body.googlePW
     loginUser.Userlocation = req.body.location
-    
+
     console.log(req.body)
     console.log(loginUser)
     res.send(301);

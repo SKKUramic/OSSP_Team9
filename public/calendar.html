@@ -119,7 +119,12 @@
             </main>
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
                 <div class="position-sticky pt-3 sidebar-sticky">
-
+                    <div class="container mt-3">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#taskModal">
+                            할 일 추가하기
+                        </button>
+                    </div>
 
                     <h6
                         class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
@@ -132,16 +137,31 @@
 
 
                     </div>
-                    <label class="list-group-item d-flex gap-3 bg-light">
-                        <span class="pt-1 form-checked-content">
-                            <span contenteditable="true" class="w-100">Add new schedule</span>
-                            <input id="s_title" type="text" name="" value="" class="w-100" placeholder="Title">
-                            <input id="s_dead" type="text" name="" value="" class="w-100" placeholder="Deadline">
-                            <input type="button" name="" value="append" class="w-100" onclick="addschedule()">
-                        </span>
-                    </label>
+
                 </div>
             </nav>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="taskModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">할 일 추가하기</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-2">할 일</p>
+                    <input type="text" class="form-control mb-2" id="s_title" placeholder="Enter a task here">
+                    <p class="mb-2">기한</p>
+                    <input type="text" class="form-control" id="s_dead" placeholder="Due Date">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="addButton" class="btn btn-primary" data-bs-dismiss="modal">추가하기</button>
+                    <!-- 추가하기 버튼 누르면 모달 닫기 + input값 불러와서 저장하기 -->
+                </div>
+            </div>
         </div>
     </div>
 
@@ -157,42 +177,55 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
         integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
         crossorigin="anonymous"></script>
-    
-    
+
+
     <script>
         window.addEventListener("load", () => {
 
-            let where = { where: "Suwon, South Korea" }
+            fetch("/loginUserLocation", {
+                method: "GET",
+            }).then(res => res.text())
+                .then(text => {
+                    let where = { where: text };
 
-            fetch("/weather", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(where)
-            }).then(res => res.json())
-                .then(weatherObject => {
+                    fetch("/weather", {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(where)
+                    }).then(res => res.json())
+                        .then(weatherObject => {
 
-                    /*
-                    for (const key in weatherObject) {
-                        let element = weatherObject[key];
-                        console.log(key, ":", element);
-                    }
-                    */
+                            let date = weatherObject.date;
+                            let location = weatherObject.location;
+                            let temperature = weatherObject.temperature;
+                            let shortday = weatherObject.shortday;
+                            let imageUrl = weatherObject.imageUrl;
 
-                    let date = weatherObject.date;
-                    let location = weatherObject.location;
-                    let temperature = weatherObject.temperature;
-                    let shortday = weatherObject.shortday;
-                    let imageUrl = weatherObject.imageUrl;
+                            document.getElementById("weather_date").textContent = date + " (" + shortday + ")";
+                            document.getElementById("weather_temperature").textContent = temperature + "°C";
+                            document.getElementById("weather_img").src = imageUrl;
+                            document.getElementById("weather_location").textContent = location;
 
-                    document.getElementById("weather_date").textContent = date + " (" + shortday + ")";
-                    document.getElementById("weather_temperature").textContent = temperature + "°C";
-                    document.getElementById("weather_img").src = imageUrl;
-                    document.getElementById("weather_location").textContent = location;
-
+                        })
                 })
+
+
         })
+
+        let myModalEl = document.getElementById('taskModal');
+        myModalEl.addEventListener('hide.bs.modal', function (event) {
+            console.log("modal hide!");
+        })
+
+        let addButton = document.getElementById('addButton');
+        addButton.addEventListener("click", () => {
+            console.log("추가");
+            addschedule();
+        })
+
+
 
     </script>
 
