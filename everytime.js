@@ -12,8 +12,6 @@ async function crawl() {
   const id = everytimeUser.getID(); // 에브리타임 아이디를 넣어주세요
   const pw = everytimeUser.getPW(); // 에브리타임 비밀번호를 넣어주세요
 
-  console.log(id + " and " + pw)
-
   //페이지로 이동
   await page.goto('https://everytime.kr/login');
 

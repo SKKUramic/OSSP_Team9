@@ -97,7 +97,7 @@ app.post('/saveSchedules', (req, res) => {
     //console.log(req.body);
 
     for (let i = 0; i < userList.length; i++) {
-        if (userList[i].everytimeID == loginUser.UserGID) {
+        if (userList[i].everytimeID == loginUser.UserEID) {
             userList[i].schedules = req.body;
             console.log(userList[i].everytimeID, userList[i].schedules);
         }
@@ -157,16 +157,16 @@ app.post('/loginUser', (req, res) => {
 
     loginUser.Username = req.body.name
     loginUser.UserSchoolID = req.body.studentID
-    loginUser.UserEmail = req.body.email_input
+    loginUser.UserEmail = req.body.email
     loginUser.UserphoneNumber = req.body.phoneNumber
     loginUser.UserSchoolEmail = req.body.schoolEmail
-    loginUser.UserPassword = req.body.password_input
-    loginUser.UserGID = req.body.everytimeID
-    loginUser.UserGPW = req.body.everytimePW
+    loginUser.UserPassword = req.body.password
+    loginUser.UserEID = req.body.everyID
+    loginUser.UserEPW = req.body.everyPW
     loginUser.Userlocation = req.body.location
 
     for (let i = 0; i < userList.length; i++) {
-        if (userList[i].everytimeID == loginUser.UserGID) {
+        if (userList[i].everytimeID == loginUser.UserEID) {
             loginUser.UserSchedules = userList[i].schedules;
             console.log(loginUser.UserSchedules);
         }

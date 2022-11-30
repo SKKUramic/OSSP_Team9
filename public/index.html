@@ -112,25 +112,29 @@
                 .then((userList) => {
                     let name = ""
                     let studentID = ""
+                    let email = ""
                     let phoneNumber = ""
+                    let password = ""
                     let schoolEmail = ""
-                    let everytimeID = ""
-                    let everytimePW = ""
+                    //let everytimeID = ""
+                    //let everytimePW = ""
                     let location = ""
 
-                    let email_input = document.getElementById("floatingInput").value;
-                    let password_input = document.getElementById("floatingPassword").value;
+                    let everyID = document.getElementById("floatingInput").value;
+                    let everyPW = document.getElementById("floatingPassword").value;
                     let isUser = false;
 
                     for (idx in userList){
-                        if (email_input === userList[idx].email && password_input === userList[idx].password){
+                        if (everyID === userList[idx].everytimeID && everyPW === userList[idx].everytimePW){
                             isUser = true;
                             name = userList[idx].name
                             studentID = userList[idx].studentID;
+                            email = userList[idx].email
                             phoneNumber = userList[idx].phoneNumber;
+                            password = userList[idx].password
                             schoolEmail = userList[idx].schoolEmail;
-                            everytimeID = userList[idx].everytimeID;
-                            everytimePW = userList[idx].everytimePW;
+                            //everytimeID = userList[idx].everytimeID;
+                            //everytimePW = userList[idx].everytimePW;
                             location = userList[idx].location;
                             break;
                         }
@@ -145,7 +149,7 @@
                                 'Content-Type': 'application/json',
                             },
                             redirect: 'follow',
-                            body: JSON.stringify({ name, studentID, email_input, phoneNumber, schoolEmail, password_input, everytimeID, everytimePW, location })
+                            body: JSON.stringify({ name, studentID, email, phoneNumber, schoolEmail, password, everyID, everyPW, location })
                         })
                         window.open("calendar.html", "_self");
                     }
