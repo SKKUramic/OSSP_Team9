@@ -1,6 +1,6 @@
 var keywords = new Array(0);
 var keylen = 0;
-var schedules = new Array(0);
+var schedules = [];
 var schedulelen = 0;
 
 function addkeyword() {

@@ -20,6 +20,7 @@ const uObject = {
     everytimeID: "everytimeID", // 구글 연동을 위한 아이디
     everytimePW: "everytimePW", // 구글 연동을 위한 비밀번호
     location: "suwon, South Korea",
+    schedules: [],
 }
 
 const loginUser = {  // 로그인한 유저의 정보를 저장함
@@ -32,6 +33,7 @@ const loginUser = {  // 로그인한 유저의 정보를 저장함
     UserGID: "",
     UserGPW: "",
     Userlocation: "",
+    UserSchedules: [],
 }
 
 userList.push(uObject);
@@ -71,15 +73,39 @@ function getWeather(weather) {
 app.use(express.static('public'));
 
 app.get('/loginUserLocation', (req, res) => {
-    //console.log("loginUser 위치 : ", loginUser.Userlocation)
+    console.log("loginUser 위치 : ", loginUser.Userlocation)
     res.send(loginUser.Userlocation);
+})
+
+app.get('/loadSchdules', (req, res) => {
+    console.log(loginUser.UserSchedules);
+    res.send(JSON.stringify(loginUser.UserSchedules));
+})
+
+app.post('/saveSchedules', (req, res) => {
+    //console.log(req.body);
+
+    for (let i = 0; i < userList.length; i++) {
+        if (userList[i].everytimeID == loginUser.UserGID) {
+            userList[i].schedules = req.body;
+            console.log(userList[i].everytimeID, userList[i].schedules);
+        }
+    }
+
+    for (let v in Object.keys(loginUser)) {
+        if (v === "UserSchedules") loginUser[v] = [];
+        loginUser[v] = "";
+    }
+
+    res.send("완료!");
+
 })
 
 app.post('/weather', (req, res) => {
 
     let where = req.body.where;
 
-    //console.log("위치 : ", where);
+    console.log("위치 : ", where);
 
     weather.find({ search: where, degreeType: 'C' }, function (err, result) {
         if (err) console.log(err);
@@ -128,8 +154,15 @@ app.post('/loginUser', (req, res) => {
     loginUser.UserGPW = req.body.everytimePW
     loginUser.Userlocation = req.body.location
 
-    console.log(req.body)
-    console.log(loginUser)
+    for (let i = 0; i < userList.length; i++) {
+        if (userList[i].everytimeID == loginUser.UserGID) {
+            loginUser.UserSchedules = userList[i].schedules;
+            console.log(loginUser.UserSchedules);
+        }
+    }
+
+    console.log(req.body);
+    console.log(loginUser);
     res.send(301);
 });
 
