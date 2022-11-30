@@ -159,8 +159,8 @@
             let phoneNumber = document.getElementById("phonenumber-input").value;
             let schoolEmail = document.getElementById("skkuemail-input").value;
             let password = document.getElementById("password-input").value;
-            let googleID = document.getElementById("g_account-input").value;
-            let googlePW = document.getElementById("g_password-input").value;
+            let everytimeID = document.getElementById("g_account-input").value;
+            let everytimePW = document.getElementById("g_password-input").value;
             let location = document.getElementById("location-input").value;
 
             let email_regax = /\w+@\w+\.\w+/;
@@ -172,9 +172,9 @@
                     let boolValue = "NaN";
 
                     if (email_regax.test(email) == false){boolValue = "False";}
-                    if (ID_regax.test(googleID) == false){boolValue = "False";}
+                    if (ID_regax.test(everytimeID) == false){boolValue = "False";}
                     for (idx in userList){
-                        if (email === userList[idx].email || googleID === userList[idx].googleID){
+                        if (email === userList[idx].email || everytimeID === userList[idx].everytimeID){
                             boolValue = "False";
                         }
                     }
@@ -196,7 +196,7 @@
                             headers: {
                                 'Content-Type': 'application/json',
                             },
-                            body: JSON.stringify({ name, studentID, email, phoneNumber, schoolEmail, password, googleID, googlePW, location })
+                            body: JSON.stringify({ name, studentID, email, phoneNumber, schoolEmail, password, everytimeID, everytimePW, location })
                         })
                             .then(res => res.text())
                             .then(text => {

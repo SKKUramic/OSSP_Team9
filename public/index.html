@@ -114,8 +114,8 @@
                     let studentID = ""
                     let phoneNumber = ""
                     let schoolEmail = ""
-                    let googleID = ""
-                    let googlePW = ""
+                    let everytimeID = ""
+                    let everytimePW = ""
                     let location = ""
 
                     let email_input = document.getElementById("floatingInput").value;
@@ -129,8 +129,8 @@
                             studentID = userList[idx].studentID;
                             phoneNumber = userList[idx].phoneNumber;
                             schoolEmail = userList[idx].schoolEmail;
-                            googleID = userList[idx].googleID;
-                            googlePW = userList[idx].googlePW;
+                            everytimeID = userList[idx].everytimeID;
+                            everytimePW = userList[idx].everytimePW;
                             location = userList[idx].location;
                             break;
                         }
@@ -145,7 +145,7 @@
                                 'Content-Type': 'application/json',
                             },
                             redirect: 'follow',
-                            body: JSON.stringify({ name, studentID, email_input, phoneNumber, schoolEmail, password_input, googleID, googlePW, location })
+                            body: JSON.stringify({ name, studentID, email_input, phoneNumber, schoolEmail, password_input, everytimeID, everytimePW, location })
                         })
                         window.open("calendar.html", "_self");
                     }

@@ -17,8 +17,8 @@ const uObject = {
     phoneNumber: "012-3456-7890",   // 핸드폰 번호
     schoolEmail: "School@example.com",   // 학교 이메일
     password: "password", // 이 사이트에서 사용할 비밀번호
-    googleID: "googleID", // 구글 연동을 위한 아이디
-    googlePW: "googlePW", // 구글 연동을 위한 비밀번호
+    everytimeID: "everytimeID", // 구글 연동을 위한 아이디
+    everytimePW: "everytimePW", // 구글 연동을 위한 비밀번호
     location: "suwon, South Korea",
 }
 
@@ -124,8 +124,8 @@ app.post('/loginUser', (req, res) => {
     loginUser.UserphoneNumber = req.body.phoneNumber
     loginUser.UserSchoolEmail = req.body.schoolEmail
     loginUser.UserPassword = req.body.password_input
-    loginUser.UserGID = req.body.googleID
-    loginUser.UserGPW = req.body.googlePW
+    loginUser.UserGID = req.body.everytimeID
+    loginUser.UserGPW = req.body.everytimePW
     loginUser.Userlocation = req.body.location
 
     console.log(req.body)
