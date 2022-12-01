@@ -100,25 +100,25 @@
 
                     <div class="mb-3">
                         <label for="skku_password">비밀번호</label>
-                        <input type="skku-password" class="form-control" id="password-input" placeholder="" required>
+                        <input type="password" class="form-control" id="password-input" placeholder="" required>
                         <div class="invalid-feedback">
                             성균관대학교 계정 비밀번호를 입력해주세요.
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <label for="g_account">구글 계정</label>
-                        <input type="g_account" class="form-control" id="g_account-input" placeholder="해당 계정이 로그인 시 사용됩니다." required>
+                        <label for="g_account">에브리타임 계정</label>
+                        <input type="g_account" class="form-control" id="g_account-input" placeholder="해당 아이디가 로그인 시 사용됩니다." required>
                         <div class="invalid-feedback">
-                            구글 계정을 입력해주세요.
+                            에브리타임 아이디를 입력해주세요.
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <label for="g_password">구글 비밀번호</label>
-                        <input type="password" class="form-control" id="g_password-input" placeholder="" required>
+                        <label for="g_password">에브리타임 비밀번호</label>
+                        <input type="password" class="form-control" id="g_password-input" placeholder="해당 비밀번호가 로그인 시 사용됩니다." required>
                         <div class="invalid-feedback">
-                            구글 비밀번호를 입력해주세요.
+                            에브리타임 비밀번호를 입력해주세요.
                         </div>
                     </div>
 
@@ -200,7 +200,7 @@
                         })
                             .then(res => res.text())
                             .then(text => {
-                                console.log(text);
+                                window.open("index.html", "_self");
                             })
                         
                     }
