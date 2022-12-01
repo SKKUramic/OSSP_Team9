@@ -20,7 +20,7 @@ const uObject = {
     password: "password", // 이 사이트에서 사용할 비밀번호
     everytimeID: "everytimeID", // 구글 연동을 위한 아이디
     everytimePW: "everytimePW", // 구글 연동을 위한 비밀번호
-    location: "suwon, South Korea",
+    location: "seoul, South Korea",
     schedules: [],
 }
 
