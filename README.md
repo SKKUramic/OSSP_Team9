@@ -4,6 +4,13 @@
 <!--- &nbsp;는 빈 줄을 만들기 위한 것입니다.-->
 &nbsp;
 
+### 소개 영상
+> https://youtu.be/Xu5jPIvz6Cw
+
+### How to use
+* 해당 프로그램은 client-server 서비스를 제공하고 있습니다. code를 zip파일로 다운받아 압축해제하신 후 사용하실 수 있습니다.
+* node index.js로 index.js를 실행하신 상태에서, localhost:3000에 접속하시면 사용할 수 있습니다.
+
 ## Sign in & Register service
 ### **Register**
 #### 로그인 화면에서 Register 버튼을 눌러 회원가입을 진행할 수 있습니다.
